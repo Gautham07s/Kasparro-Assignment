@@ -1,0 +1,18 @@
+Deepa Reddy
+deepa.reddy@gmail.com
+
+SKILLS
+Python, LangChain, FastAPI
+
+This candidate lists LangChain and FastAPI in their skills section but has
+no projects or work experience mentioning these frameworks.
+
+PROJECTS
+
+Todo App (Python)
+- Simple command-line todo application written in Python
+- Supports add, remove, and list operations with JSON file storage
+- Technologies: Python
+
+EDUCATION
+B.Tech Computer Science — VIT Vellore (2022-2026)

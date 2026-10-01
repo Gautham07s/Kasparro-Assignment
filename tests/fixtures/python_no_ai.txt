@@ -1,0 +1,29 @@
+Ravi Kumar
+ravi.kumar@yahoo.com
+
+SKILLS
+Python, Flask, Django, PostgreSQL, REST APIs, pytest, SQLAlchemy
+
+PROJECTS
+
+Inventory Management System (Flask)
+- Built a full-stack inventory management system using Flask and PostgreSQL
+- Implemented RESTful APIs for CRUD operations on products and orders
+- Added user authentication with Flask-Login and session management
+- Wrote unit tests with pytest covering 85% of business logic
+- Technologies: Python, Flask, PostgreSQL, SQLAlchemy, pytest
+
+Blog Platform (Django)
+- Developed a blog platform with Django supporting markdown posts and comments
+- Implemented pagination, search, and tag-based filtering
+- Deployed on Heroku with PostgreSQL backend
+
+EXPERIENCE
+
+Python Developer Intern — DataSoft (Jan 2024 - Jun 2024)
+- Maintained and extended Python-based data processing pipelines
+- Built REST API endpoints using Django REST Framework
+- Wrote integration tests with pytest
+
+EDUCATION
+B.Tech Computer Science — NIT Trichy (2021-2025)

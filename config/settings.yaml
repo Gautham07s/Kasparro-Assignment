@@ -1,0 +1,331 @@
+# ──────────────────────────────────────────────────────────────
+# AI Resume Screening & Ranking System — Configuration
+# ──────────────────────────────────────────────────────────────
+# All point values, thresholds, and lexicons live here so that
+# business logic in code never contains magic numbers.
+
+# ── Score Weights (category maxima) ──────────────────────────
+score_weights:
+  ai_project_depth: 40
+  python_backend: 30
+  cloud_fullstack: 15
+  github: 10
+  engineering_depth: 5
+
+# ── AI / Agentic Project Depth (max 40) ─────────────────────
+ai_project:
+  tier_points:
+    substantive: 20
+    basic: 12
+    thin_wrapper: 5
+    tutorial_style: 3
+    none: 0
+  feature_points:               # max 16 total from checklist
+    retrieval: 3
+    tool_calling: 3
+    state_orchestration: 3
+    evaluation: 3
+    business_logic: 2
+    data_processing: 2
+  ownership_bonus: 2
+  second_project_bonus: 2       # if 2nd project is substantive or basic
+  penalties:
+    thin_wrapper_default: -10
+    thin_wrapper_no_features: -15
+    thin_wrapper_has_features: -5
+    tutorial_no_detail: -5
+    tutorial_no_ownership: -8
+  skills_only_cap: 8            # cap when framework only in skills list
+
+# ── Python & Backend (max 30) ────────────────────────────────
+python_backend:
+  python: 8
+  fastapi: 6
+  async_programming: 5
+  postgresql: 6
+  redis: 5
+  flask_django_fallback: 3     # used when FastAPI absent
+  skills_only_ratio: 0.4       # 40% credit for skills-list-only
+
+# ── Cloud / Deployment / Full Stack (max 15) ─────────────────
+cloud_fullstack:
+  gcp: 5
+  other_cloud: 3               # AWS, Azure
+  docker: 5
+  deployment_evidence: 3
+  react_nextjs_project: 2      # part of end-to-end system
+  react_nextjs_skills_only: 1
+  skills_only_ratio: 0.4
+
+# ── GitHub Activity (max 10) ─────────────────────────────────
+github:
+  activity_thresholds:          # PushEvents in last 90 days
+    - {min: 0,  max: 0,  score: 0}
+    - {min: 1,  max: 4,  score: 2}
+    - {min: 5,  max: 14, score: 4}
+    - {min: 15, max: 999, score: 5}
+  repo_maintained_points:       # non-fork repos pushed in 12 months
+    - {count: 1, score: 1}
+    - {count: 2, score: 2}
+    - {count: 3, score: 3}     # 3+ -> 3
+  repo_relevant_points:         # Python lang or AI keywords
+    - {count: 1, score: 1}
+    - {count: 2, score: 2}     # 2+ -> 2
+  ai_keywords:
+    - langchain
+    - langgraph
+    - llm
+    - rag
+    - agent
+    - openai
+    - anthropic
+    - embedding
+    - vector
+    - transformer
+    - gpt
+    - chatbot
+    - ai
+    - ml
+    - nlp
+
+# ── Engineering Depth (max 5, 1 pt each) ────────────────────
+engineering_depth:
+  signals:
+    - testing
+    - architecture
+    - caching
+    - queues
+    - observability
+    - concurrency
+    - failure_handling
+
+# ── Guardrail Cap ────────────────────────────────────────────
+caps:
+  no_meaningful_ai_project: 55  # overall cap when no substantive/basic AI project
+
+# ── Eligibility Lexicons ────────────────────────────────────
+eligibility:
+  python_direct:
+    - python
+  python_exclude:
+    - jython
+  python_implied:
+    - fastapi
+    - django
+    - flask
+    - pandas
+    - numpy
+    - pytorch
+    - tensorflow
+    - pydantic
+    - langchain
+    - langgraph
+    - llamaindex
+    - streamlit
+    - sqlalchemy
+    - pytest
+    - celery
+  ai_frameworks:
+    - langchain
+    - langgraph
+    - llamaindex
+    - crewai
+    - autogen
+    - semantic kernel
+    - haystack
+    - google adk
+    - agent development kit
+  ai_concepts:
+    - rag
+    - retrieval-augmented
+    - retrieval augmented
+    - embeddings
+    - vector search
+    - vector store
+    - vector database
+    - faiss
+    - chroma
+    - pinecone
+    - weaviate
+    - qdrant
+    - tool calling
+    - function calling
+    - multi-agent
+    - agentic
+    - ai agent
+    - llm
+    - large language model
+    - prompt engineering
+    - evaluation pipeline
+    - fine-tuning llm
+    - fine tuning llm
+  ai_provider_apis:
+    - openai api
+    - anthropic
+    - claude api
+    - gemini api
+  ai_extended:
+    # Equivalent custom implementations — keeps eligibility extensible
+    - retrieval system
+    - semantic search
+    - document qa
+    - agent workflow
+    - tool execution
+    - function execution
+    - autonomous workflow
+    - llm application
+    - conversational ai
+    - vector embeddings
+    - semantic retrieval
+    - model evaluation
+  ml_only_terms:
+    # Classic ML / CV / NLP terms that do NOT qualify alone
+    - machine learning
+    - deep learning
+    - neural network
+    - convolutional
+    - cnn
+    - rnn
+    - lstm
+    - random forest
+    - gradient boosting
+    - xgboost
+    - svm
+    - support vector
+    - logistic regression
+    - decision tree
+    - k-means
+    - clustering
+    - classification
+    - regression model
+    - computer vision
+    - image recognition
+    - object detection
+    - yolo
+    - opencv
+    - scikit-learn
+    - sklearn
+    - nltk
+    - spacy
+    - text classification
+    - sentiment analysis
+    - named entity
+    - pos tagging
+    - feature engineering
+    - hyperparameter
+    - cross-validation
+
+# ── Skill Alias Map ──────────────────────────────────────────
+skill_aliases:
+  postgresql:
+    - postgres
+    - postgresql
+    - psql
+  python:
+    - python
+    - python3
+  fastapi:
+    - fastapi
+    - fast api
+  django:
+    - django
+  flask:
+    - flask
+  react:
+    - react
+    - reactjs
+    - react.js
+  nextjs:
+    - nextjs
+    - next.js
+    - next js
+  docker:
+    - docker
+    - dockerfile
+    - docker-compose
+  gcp:
+    - gcp
+    - google cloud
+    - google cloud platform
+    - cloud run
+    - cloud functions
+    - bigquery
+    - vertex ai
+  aws:
+    - aws
+    - amazon web services
+    - ec2
+    - s3
+    - lambda
+    - sagemaker
+  azure:
+    - azure
+    - microsoft azure
+  redis:
+    - redis
+  langchain:
+    - langchain
+  langgraph:
+    - langgraph
+  llamaindex:
+    - llamaindex
+    - llama index
+    - llama_index
+  pytorch:
+    - pytorch
+    - torch
+  tensorflow:
+    - tensorflow
+    - tf
+  pandas:
+    - pandas
+  numpy:
+    - numpy
+  java:
+    - java
+  javascript:
+    - javascript
+    - js
+    - typescript
+    - ts
+  kubernetes:
+    - kubernetes
+    - k8s
+
+# ── GitHub Reserved Paths (not usernames) ────────────────────
+github_reserved_paths:
+  - orgs
+  - settings
+  - topics
+  - features
+  - marketplace
+  - sponsors
+  - explore
+  - notifications
+  - new
+  - login
+  - signup
+  - pricing
+  - about
+  - enterprise
+  - team
+  - security
+  - customer-stories
+  - open-source
+  - readme
+  - collections
+  - trending
+  - events
+  - apps
+  - codespaces
+  - copilot
+  - issues
+  - pulls
+  - discussions
+  - actions
+  - projects
+  - packages
+  - stars
+  - repositories
+  - people
+  - organizations

@@ -1,0 +1,29 @@
+Priya Sharma
+priya.sharma@gmail.com
+https://github.com/priyasharma
+
+SKILLS
+Python, JavaScript, React, Next.js, FastAPI, LangChain, Docker, PostgreSQL, AWS
+
+PROJECTS
+
+Document Q&A System (Python + LangChain + React)
+- Built a document question-answering system using Python and LangChain
+- Implemented RAG pipeline with FAISS vector store for semantic search
+- Created React/Next.js frontend with real-time streaming responses
+- Backend built with FastAPI, deployed with Docker on AWS ECS
+- Technologies: Python, FastAPI, LangChain, FAISS, React, Next.js, Docker, AWS
+
+Portfolio Website (Next.js)
+- Personal portfolio built with Next.js and TypeScript
+- Responsive design with dark mode support
+
+EXPERIENCE
+
+Software Engineer Intern — TechStartup (Mar 2024 - Sep 2024)
+- Developed microservices with FastAPI and PostgreSQL
+- Implemented async background jobs with Python
+- Built frontend components with React and Next.js
+
+EDUCATION
+B.Tech Computer Science — BITS Pilani (2021-2025)

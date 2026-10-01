@@ -1,0 +1,40 @@
+Arjun Mehta
+arjun.mehta@gmail.com
+GitHub: https://github.com/arjunm
+
+SUMMARY
+Full-stack Python developer with 2+ years of experience building AI-powered applications.
+Passionate about agentic systems, retrieval-augmented generation, and scalable backend design.
+
+SKILLS
+Python, FastAPI, LangChain, LangGraph, PostgreSQL, Redis, Docker, GCP, React, Next.js,
+async programming, pytest, SQLAlchemy, Pydantic, Celery
+
+PROJECTS
+
+AI Research Assistant (LangChain + FastAPI)
+- Built a retrieval-augmented generation (RAG) system using LangChain and FAISS for
+  semantic document search across 10K+ research papers
+- Implemented tool calling for dynamic API integration (weather, calculator, web search)
+- Designed state orchestration with LangGraph for multi-step reasoning workflows
+- Added evaluation pipeline using RAGAS metrics (faithfulness, relevancy, context recall)
+- Deployed on GCP Cloud Run with Docker, serving 500+ daily queries
+- Technologies: Python, FastAPI, LangChain, LangGraph, FAISS, PostgreSQL, Redis, Docker, GCP
+
+Multi-Agent Customer Support Bot
+- Developed a multi-agent system using LangGraph with specialized agents for billing,
+  technical support, and escalation
+- Implemented async task processing with Celery and Redis for handling concurrent requests
+- Built comprehensive test suite with pytest achieving 92% coverage
+- Technologies: Python, LangGraph, FastAPI, Redis, Celery, PostgreSQL, pytest
+
+EXPERIENCE
+
+Backend Engineer Intern — TechCorp (Jun 2024 - Dec 2024)
+- Built RESTful APIs using FastAPI with async/await patterns serving 10K RPM
+- Designed PostgreSQL schemas with SQLAlchemy ORM, implemented caching with Redis
+- Set up observability with structured logging and Prometheus metrics
+- Handled failure scenarios with retry logic and circuit breakers
+
+EDUCATION
+B.Tech Computer Science — IIT Delhi (2021-2025)

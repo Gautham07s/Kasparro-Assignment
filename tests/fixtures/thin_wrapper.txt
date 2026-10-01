@@ -1,0 +1,16 @@
+Mike Wilson
+mike.wilson@gmail.com
+
+SKILLS
+Python, OpenAI API, Streamlit
+
+PROJECTS
+
+ChatGPT Wrapper (Python + OpenAI)
+- Created a simple Streamlit chat interface that wraps the OpenAI API
+- Users can ask questions and get responses from GPT models
+- Added basic prompt templates for different use cases
+- Technologies: Python, OpenAI API, Streamlit
+
+EDUCATION
+B.S. Computer Science — Ohio State University (2022-2026)

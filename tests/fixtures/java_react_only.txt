@@ -1,0 +1,28 @@
+Sarah Johnson
+sarah.johnson@outlook.com
+
+SKILLS
+Java, Spring Boot, React, Next.js, TypeScript, MongoDB, MySQL, Jenkins, AWS
+
+PROJECTS
+
+E-Commerce Platform (Java + React)
+- Built a full-stack e-commerce platform using Spring Boot backend and React frontend
+- Implemented user authentication with JWT tokens and role-based access control
+- Designed RESTful APIs with Spring MVC and integrated MySQL database
+- Deployed on AWS EC2 with Jenkins CI/CD pipeline
+
+Social Media Dashboard (Next.js)
+- Created a responsive social media analytics dashboard using Next.js and TypeScript
+- Integrated multiple social media APIs for data aggregation
+- Used MongoDB for storing analytics data
+
+EXPERIENCE
+
+Frontend Developer Intern — WebAgency (Mar 2024 - Aug 2024)
+- Developed responsive web applications using React and TypeScript
+- Collaborated with backend team on API integration
+- Implemented unit testing with Jest
+
+EDUCATION
+B.Sc. Computer Science — University of Michigan (2021-2025)

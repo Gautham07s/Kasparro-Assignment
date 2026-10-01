@@ -1,0 +1,34 @@
+Dr. Amit Patel
+amit.patel@research.org
+
+SKILLS
+Python, TensorFlow, PyTorch, scikit-learn, OpenCV, NumPy, Pandas, MATLAB
+
+PROJECTS
+
+Image Classification System (Deep Learning)
+- Developed a CNN-based image classification system using TensorFlow and Keras
+- Trained models on CIFAR-10 dataset achieving 94% accuracy
+- Implemented data augmentation and transfer learning with ResNet50
+- Technologies: Python, TensorFlow, OpenCV, NumPy
+
+Sentiment Analysis Pipeline (NLP)
+- Built a sentiment analysis pipeline using scikit-learn and NLTK
+- Implemented feature engineering with TF-IDF and word embeddings
+- Trained logistic regression and random forest classifiers
+- Technologies: Python, scikit-learn, NLTK, Pandas
+
+Stock Price Prediction (Machine Learning)
+- Created an LSTM-based stock price prediction model using PyTorch
+- Implemented cross-validation and hyperparameter tuning
+- Technologies: Python, PyTorch, Pandas, NumPy
+
+EXPERIENCE
+
+Research Assistant — AI Lab, IISc Bangalore (Jun 2024 - Present)
+- Working on computer vision and deep learning research
+- Training neural networks for object detection using YOLO
+- Publishing results in machine learning conferences
+
+EDUCATION
+B.Tech Computer Science — IIT Bombay (2021-2025)
