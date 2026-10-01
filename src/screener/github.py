@@ -26,9 +26,10 @@ _rate_limited: bool = False
 
 def reset_cache() -> None:
     """Reset the run-level cache (for testing)."""
-    global _github_cache, _rate_limited
+    global _github_cache, _rate_limited, _warned_no_token
     _github_cache.clear()
     _rate_limited = False
+    _warned_no_token = False
 
 
 async def enrich_github(
@@ -92,12 +93,18 @@ async def enrich_github(
             await client.aclose()
 
 
+_warned_no_token: bool = False
+
+
 def _create_client(settings: Settings) -> httpx.AsyncClient:
     """Create an httpx.AsyncClient with proper headers."""
+    global _warned_no_token
+
     headers = {"Accept": "application/vnd.github+json"}
     if settings.github_token:
         headers["Authorization"] = f"Bearer {settings.github_token}"
-    else:
+    elif not _warned_no_token:
+        _warned_no_token = True
         logger.warning(
             "No GITHUB_TOKEN set. Unauthenticated rate limit is 60 req/hr. "
             "50 candidates × 2 calls = 100 calls may exceed this."

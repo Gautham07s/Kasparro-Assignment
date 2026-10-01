@@ -124,6 +124,17 @@ _NAME_SKIP_PATTERNS = re.compile(
     re.IGNORECASE,
 )
 
+# Common resume headings that should NOT be treated as names
+_HEADING_SKIP = {
+    "professional summary", "summary", "objective", "profile", "about me",
+    "career objective", "personal profile", "professional profile",
+    "career summary", "executive summary", "skills", "technical skills",
+    "experience", "education", "projects", "certifications", "achievements",
+    "work experience", "professional experience", "contact information",
+    "personal information", "personal details", "contact details",
+    "contact", "about", "interests", "hobbies", "references",
+}
+
 
 def _extract_name(text: str, file_name: str) -> str:
     """
@@ -138,6 +149,9 @@ def _extract_name(text: str, file_name: str) -> str:
             continue
         # Skip lines with emails, URLs, digits, etc.
         if _NAME_SKIP_PATTERNS.search(line):
+            continue
+        # Skip common resume headings
+        if line.lower().rstrip(":").strip() in _HEADING_SKIP:
             continue
         tokens = line.split()
         if 2 <= len(tokens) <= 4 and all(
