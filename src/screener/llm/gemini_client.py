@@ -25,7 +25,7 @@ class GeminiClient(LLMClient):
         if not settings.gemini_api_key:
             raise ValueError("GEMINI_API_KEY is not set.")
         self.client = genai.Client(api_key=settings.gemini_api_key)
-        self.model = settings.llm_model or "gemini-2.5-flash"
+        self.model = settings.llm_model or "gemini-2.0-flash"
         self.timeout = settings.llm_timeout_seconds
 
     async def extract(self, system: str, user: str, schema: type) -> object:

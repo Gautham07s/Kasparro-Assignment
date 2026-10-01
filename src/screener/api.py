@@ -94,12 +94,21 @@ async def screen_resumes(request: ScreenRequest):
     input_dir = request.input_dir or settings.default_input_dir
     output_path = request.output_path or settings.default_output_path
 
-    # Validate input directory
+    # Validate input directory by resolving relative to project root
+    project_root = Path(__file__).resolve().parent.parent.parent
+    
     input_path = Path(input_dir)
+    if not input_path.is_absolute():
+        input_path = project_root / input_path
+        
+    output_path = Path(output_path)
+    if not output_path.is_absolute():
+        output_path = project_root / output_path
+
     if not input_path.exists() or not input_path.is_dir():
         raise HTTPException(
             status_code=400,
-            detail=f"Input directory does not exist or is not a directory: {input_dir}",
+            detail=f"Input directory does not exist or is not a directory: {input_path} (cwd: {Path.cwd()})",
         )
 
     # Guard against concurrent runs

@@ -156,6 +156,8 @@ def ingest_resumes(
             try:
                 raw_text, links = reader(file_path)
             except Exception as exc:
+                import traceback
+                traceback.print_exc()
                 failed.append(FailedResume(
                     file_name=file_path.name,
                     reason=str(exc),
