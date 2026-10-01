@@ -22,6 +22,7 @@ logger = logging.getLogger(__name__)
 # Run-level cache: prevents repeated enrichment for the same username
 _github_cache: dict[str, GitHubSummary] = {}
 _rate_limited: bool = False
+_warned_no_token: bool = False
 
 
 def reset_cache() -> None:
@@ -92,8 +93,6 @@ async def enrich_github(
         if own_client and client:
             await client.aclose()
 
-
-_warned_no_token: bool = False
 
 
 def _create_client(settings: Settings) -> httpx.AsyncClient:
