@@ -21,12 +21,22 @@ from .config import load_settings
 from .models import ScreeningRun
 from .pipeline import run_screening
 
+from fastapi.middleware.cors import CORSMiddleware
+
 logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title="AI Resume Screening & Ranking System",
     description="Screen and rank candidate resumes based on Python and AI/agentic evidence",
     version="1.0.0",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all for local dev
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # ── In-memory state ──────────────────────────────────────────
