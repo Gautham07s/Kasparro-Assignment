@@ -180,7 +180,7 @@ The LLM extracts **FACTS and verified evidence** — code then computes points. 
 ### LLM Usage
 
 - **Structured output via Pydantic** — The LLM returns JSON matching the `ResumeAnalysis` schema; response is validated with Pydantic v2
-- **Provider adapter pattern** — `LLMClient` Protocol with Anthropic (default) and OpenAI implementations; no provider specifics leak outside `llm/`
+- **Provider adapter pattern** — `LLMClient` Protocol with Gemini (default), Anthropic, and OpenAI implementations; no provider specifics leak outside `llm/`
 - **One call per eligible resume** — Returns facts and evidence, not scores
 - **Repair retry** — On validation failure, the error is sent back for one repair attempt
 - **Deterministic fallback** — When `--no-llm`, no API key, or an LLM call fails, the keyword-based `fallback.py` produces the same output schema
