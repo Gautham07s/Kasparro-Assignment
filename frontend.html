@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Resume Screening Dashboard</title>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 2rem; background: #111827; color: #f9fafb; }
+        .container { max-width: 1000px; margin: auto; background: #1f2937; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.5); }
+        h1 { margin-top: 0; color: #60a5fa; }
+        .controls { background: #374151; padding: 1rem; border-radius: 6px; margin-bottom: 2rem; display: flex; gap: 1rem; align-items: center; }
+        button { background: #3b82f6; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #2563eb; }
+        button:disabled { background: #1e3a8a; color: #9ca3af; cursor: not-allowed; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { text-align: left; padding: 0.75rem; border-bottom: 1px solid #374151; }
+        th { background: #111827; }
+        .status { margin-left: auto; font-weight: 500; }
+        .badge { display: inline-block; padding: 0.25rem 0.5rem; border-radius: 999px; font-size: 0.875rem; font-weight: 500; background: #065f46; color: #d1fae5; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Resume Screener</h1>
+        <div class="controls">
+            <label><input type="checkbox" id="useLlm"> Use LLM Analysis</label>
+            <button id="runBtn" onclick="runScreening()">Run Pipeline</button>
+            <span class="status" id="statusMsg"></span>
+        </div>
+        
+        <h2>Top Ranked Candidates</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Candidate</th>
+                    <th>Score</th>
+                    <th>AI/Agentic</th>
+                    <th>Python/BE</th>
+                    <th>Source</th>
+                </tr>
+            </thead>
+            <tbody id="resultsBody">
+                <tr><td colspan="6">No results yet. Click "Run Pipeline".</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        async function fetchResults() {
+            try {
+                const res = await fetch('/results');
+                if (res.ok) renderTable(await res.json());
+            } catch (e) {
+                console.log("No previous results.");
+            }
+        }
+        
+        async function runScreening() {
+            const btn = document.getElementById('runBtn');
+            const status = document.getElementById('statusMsg');
+            const useLlm = document.getElementById('useLlm').checked;
+            
+            btn.disabled = true;
+            status.textContent = "Running pipeline... This may take a minute.";
+            status.style.color = "#d97706";
+            
+            try {
+                const res = await fetch('/screen', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ input_dir: "./resumes", use_llm: useLlm })
+                });
+                
+                if (!res.ok) throw new Error(await res.text());
+                
+                renderTable(await res.json());
+                status.textContent = "Pipeline complete!";
+                status.style.color = "#059669";
+            } catch (err) {
+                status.textContent = "Error: " + err.message;
+                status.style.color = "#dc2626";
+            } finally {
+                btn.disabled = false;
+            }
+        }
+        
+        function renderTable(data) {
+            const tbody = document.getElementById('resultsBody');
+            const candidates = data.ranked_candidates || [];
+            
+            if (candidates.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6">No eligible candidates found.</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = candidates.map(c => `
+                <tr>
+                    <td><strong>#${c.rank}</strong></td>
+                    <td>${c.candidate_name}<br><small style="color:#6b7280">${c.source_file}</small></td>
+                    <td><span class="badge">${c.total_score}</span></td>
+                    <td>${c.score_breakdown.ai_project_depth}</td>
+                    <td>${c.score_breakdown.python_backend}</td>
+                    <td><small>${c.analysis_source}</small></td>
+                </tr>
+            `).join('');
+        }
+        
+        // Load initial results if server has them in memory
+        fetchResults();
+    </script>
+</body>
+</html>

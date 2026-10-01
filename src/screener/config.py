@@ -109,6 +109,7 @@ class Settings(BaseModel):
     llm_model: str = ""
     anthropic_api_key: str = ""
     openai_api_key: str = ""
+    gemini_api_key: str = ""
 
     # GitHub
     github_token: str = ""
@@ -182,6 +183,7 @@ def load_settings() -> Settings:
         "LLM_MODEL": "llm_model",
         "ANTHROPIC_API_KEY": "anthropic_api_key",
         "OPENAI_API_KEY": "openai_api_key",
+        "GEMINI_API_KEY": "gemini_api_key",
         "GITHUB_TOKEN": "github_token",
         "MAX_CONCURRENCY": "max_concurrency",
         "LLM_TIMEOUT_SECONDS": "llm_timeout_seconds",

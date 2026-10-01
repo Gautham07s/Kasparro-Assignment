@@ -317,6 +317,9 @@ def _get_llm_client(settings: Settings):
         elif settings.llm_provider == "openai" and settings.openai_api_key:
             from .llm.openai_client import OpenAIClient
             return OpenAIClient(settings)
+        elif settings.llm_provider == "gemini" and settings.gemini_api_key:
+            from .llm.gemini_client import GeminiClient
+            return GeminiClient(settings)
         else:
             logger.warning("No LLM API key configured, using fallback analyzer")
             return None

@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Optional
 
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 from .config import load_settings
@@ -60,7 +61,17 @@ class HealthResponse(BaseModel):
     status: str = "ok"
 
 
+from fastapi.responses import HTMLResponse
+
 # ── Endpoints ────────────────────────────────────────────────
+
+@app.get("/", response_class=HTMLResponse)
+async def get_frontend():
+    """Serve the basic frontend HTML."""
+    frontend_path = Path(__file__).resolve().parent.parent.parent / "frontend.html"
+    if frontend_path.exists():
+        return frontend_path.read_text(encoding="utf-8")
+    return "<h1>Frontend not found</h1>"
 
 
 @app.get("/health", response_model=HealthResponse)
@@ -124,3 +135,12 @@ async def get_results():
             detail="No screening results available. Run POST /screen first.",
         )
     return _latest_run.model_dump()
+
+
+@app.get("/")
+async def serve_frontend():
+    """Serve the basic simple frontend."""
+    frontend_path = Path(__file__).resolve().parent.parent.parent / "frontend.html"
+    if not frontend_path.exists():
+        raise HTTPException(status_code=404, detail="frontend.html not found.")
+    return FileResponse(frontend_path)
