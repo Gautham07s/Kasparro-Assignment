@@ -157,6 +157,39 @@ def check_eligibility(
             has_ml_only = True
             break
 
+    # Ambiguous AI terms: these appear in both ML and AI/agentic contexts.
+    # When they only appear in classic ML/NLP contexts (e.g., "word embeddings",
+    # "tf-idf embeddings"), they do NOT satisfy the AI/agentic requirement.
+    _AMBIGUOUS_AI_TERMS = {"embeddings"}
+    _ML_CONTEXT_PATTERNS = [
+        re.compile(r"\bword\s+embeddings?\b", re.IGNORECASE),
+        re.compile(r"\btf-?idf\b.*\bembeddings?\b", re.IGNORECASE),
+        re.compile(r"\bword2vec\b", re.IGNORECASE),
+        re.compile(r"\bglove\b.*\bembeddings?\b", re.IGNORECASE),
+        re.compile(r"\bfasttext\b.*\bembeddings?\b", re.IGNORECASE),
+    ]
+
+    def _is_only_ml_context(term: str, text: str) -> bool:
+        """Check if an ambiguous term only appears in classic ML contexts."""
+        if term not in _AMBIGUOUS_AI_TERMS:
+            return False
+        # If the resume also has clear LLM/agentic indicators, allow it
+        llm_indicators = [r"\bllm\b", r"\blarge language model\b", r"\brag\b",
+                          r"\bretrieval.augmented\b", r"\bvector\s+(?:store|database|search)\b",
+                          r"\btool\s+calling\b", r"\bfunction\s+calling\b",
+                          r"\bagentic\b", r"\bai\s+agent\b", r"\bmulti.agent\b"]
+        for indicator in llm_indicators:
+            if re.search(indicator, text, re.IGNORECASE):
+                return False
+        # Check if it appears in ML contexts
+        for pattern in _ML_CONTEXT_PATTERNS:
+            if pattern.search(text):
+                return True
+        # If has_ml_only and no LLM indicators, treat as ML context
+        if has_ml_only:
+            return True
+        return False
+
     # Check all AI qualifying categories
     all_ai_terms = (
         [(t, "frameworks") for t in elig.ai_frameworks]
@@ -168,6 +201,9 @@ def check_eligibility(
     for term, category in all_ai_terms:
         ev = _find_evidence(text, term, "direct" if category == "frameworks" else "implied")
         if ev:
+            # Skip ambiguous terms that only appear in ML contexts
+            if _is_only_ml_context(term, text):
+                continue
             ai_evidence.append(ev)
             has_ai = True
             break  # One qualifying term is sufficient
