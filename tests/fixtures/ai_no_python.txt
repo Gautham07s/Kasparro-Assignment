@@ -2,21 +2,21 @@ Alex Chen
 alex.chen@proton.me
 
 SKILLS
-JavaScript, TypeScript, React, Node.js, LangChain, OpenAI API, Vector Search, Pinecone
+JavaScript, TypeScript, React, Node.js, OpenAI API, Vector Search, Pinecone
 
 PROJECTS
 
 AI Chatbot Interface (React + OpenAI)
 - Built a conversational AI chatbot using React frontend and OpenAI API
 - Implemented vector search with Pinecone for contextual retrieval
-- Added LangChain for prompt management and chain orchestration
-- Technologies: JavaScript, React, Node.js, LangChain, OpenAI API, Pinecone
+- Added prompt engineering for improved responses
+- Technologies: JavaScript, React, Node.js, OpenAI API, Pinecone
 
 EXPERIENCE
 
 Frontend Developer — StartupXYZ (Jun 2024 - Present)
-- Building AI-powered features using OpenAI API and LangChain
-- Implementing RAG pipelines for document search
+- Building AI-powered features using OpenAI API
+- Implementing RAG pipelines for document search in JavaScript
 
 EDUCATION
 B.S. Computer Science — Stanford University (2021-2025)
