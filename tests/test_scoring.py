@@ -116,7 +116,7 @@ class TestAIProjectScoring:
         """Thin wrapper penalties should appear in penalties_applied."""
         thin = _make_analysis(
             classification="thin_wrapper",
-            features={"retrieval": False, "tool_calling": False,
+            features={"retrieval": True, "tool_calling": False,
                       "state_orchestration": False, "evaluation": False,
                       "data_processing": False, "business_logic": False,
                       "backend_api": False, "deployment": False},
